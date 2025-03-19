@@ -1,0 +1,8 @@
+{
+    "postgresql":{
+        "image": "postgres:latest",
+        "containerName": "postgres-db",
+        "ports": ["5432:5432"],
+        "env": ["POSTGRES_USER=admin", "POSTGRES_PASSWORD=admin", "POSTGRES_DB=mydatabase"]
+    }
+}

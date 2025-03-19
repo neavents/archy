@@ -1,0 +1,41 @@
+{
+    "postgresql":{
+        "category": "database",
+        "subCategory": "sql",
+        "type": "on-premise",
+        "tags": [],
+        "install-intermediate":{
+            "dotnet":[
+                {
+                    "dependency": "efcore",
+                    "package": "Npsql.EntityFrameworkCore.PostgreSQL"
+                }
+            ]
+        },
+        "containerRequired": true,
+        "dependencyRequirementType": "or",
+        "dependencies": ["efcore", "dapper"],
+        "dependencyRules":{
+                "efcore": {
+                    "supported": {
+                        "dotnet":{
+                            "required": true,
+                            "condition": "how can you get logs from sink without serilog?",
+                            "needsIntermediatePackage": true
+                        }
+                    },
+                    "description": "serilog for loki"
+                },
+                "dapper": {
+                    "supported": {
+                        "dotnet":{
+                            "required": true,
+                            "condition": "you do not need promtail if you have serilog with loki sink",
+                            "needsIntermediatePackage": false
+                        }
+                    },
+                    "description": "promtail for loki"
+                }
+            }
+    }
+}
