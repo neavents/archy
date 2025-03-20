@@ -1,0 +1,13 @@
+{
+    "naming": {
+        "dotnet": {
+            "schema": ["base", "project", "prefix", "db-model", "db-name"],
+            "sources": [
+                {
+                    "name": "base",
+                    "configuration": ""
+                }
+            ]
+        }
+    }
+}

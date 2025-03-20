@@ -1,0 +1,12 @@
+{
+    "targetDirectory": "",
+    "steps":[
+        {
+            "process": "create-project",
+            "description": "",
+            "arguments": {
+                "projectNameExtension": ".Infrastructure.Persistence."
+            }
+        }
+    ]
+}

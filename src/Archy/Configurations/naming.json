@@ -1,0 +1,12 @@
+{
+    "naming": [
+        {
+            "platform": "dotnet",
+            "seperator": ".",
+            "database": {
+                "project": "Infrastructure",
+                "prefix": "Persistence"
+            }
+        }
+    ]
+}
