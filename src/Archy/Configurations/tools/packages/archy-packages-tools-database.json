@@ -8,10 +8,27 @@
             "dotnet": {
                 "required": [
                     {
-                        "package": "Microsoft.AspNetCore.EntityFrameworkCore"
+                        "package": "Microsoft.AspNetCore.EntityFrameworkCore",
+                        "version": "9.0.2"
                     }
                 ],
                 "install-paths": ["src/projname.Infrastructure.Persistence."]
+            }
+        }
+    },
+    "dapper": {
+        "category": "database",
+        "subCategory": "sql",
+        "type": "tool",
+        "tags": [],
+        "install": {
+            "dotnet": {
+                "required":[
+                    {
+                        "package": "Dapper",
+                        "version": "1.0.3"
+                    }
+                ]
             }
         }
     }

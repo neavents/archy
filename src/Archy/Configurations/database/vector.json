@@ -1,0 +1,14 @@
+{
+    "milvus":{
+        
+    },
+    "pinecone":{
+        
+    },
+    "qdrant":{
+        
+    },
+    "weviate":{
+        
+    }
+}

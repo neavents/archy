@@ -8,8 +8,31 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="Configurations\build\" />
     <Folder Include="Configurations\cdc\" />
     <Folder Include="Configurations\cdc\packages\" />
+    <Folder Include="Configurations\database\impl\graph\" />
+    <Folder Include="Configurations\database\impl\nosql\" />
+    <Folder Include="Configurations\database\impl\sql\ibmdb2\" />
+    <Folder Include="Configurations\database\impl\sql\mariadb\" />
+    <Folder Include="Configurations\database\impl\sql\mssql\" />
+    <Folder Include="Configurations\database\impl\sql\mysql\" />
+    <Folder Include="Configurations\database\impl\sql\oracle\supported\dotnet\src\" />
+    <Folder Include="Configurations\database\impl\sql\postgresql\supported\dotnet\src\" />
+    <Folder Include="Configurations\database\impl\sql\sqlite\supported\dotnet\src\" />
+    <Folder Include="Configurations\database\impl\time-series\" />
+    <Folder Include="Configurations\database\impl\vector\" />
+    <Folder Include="Configurations\messaging\impl\cloud\amazon-sns\" />
+    <Folder Include="Configurations\messaging\impl\cloud\amazon-sqs\" />
+    <Folder Include="Configurations\messaging\impl\cloud\aws-eventbridge\" />
+    <Folder Include="Configurations\messaging\impl\cloud\azure-service-bus\" />
+    <Folder Include="Configurations\messaging\impl\cloud\google-pubsub\" />
+    <Folder Include="Configurations\messaging\impl\local\activemq\supported\dotnet\src\" />
+    <Folder Include="Configurations\messaging\impl\local\apache-pulsar\supported\dotnet\src\" />
+    <Folder Include="Configurations\messaging\impl\local\kafka\supported\go\src\" />
+    <Folder Include="Configurations\messaging\impl\cloud\" />
+    <Folder Include="Configurations\messaging\impl\local\memcached-pubsub\supported\dotnet\src\" />
+    <Folder Include="Configurations\resilience\packages\" />
     <Folder Include="Interfaces\" />
     <Folder Include="Services\" />
   </ItemGroup>

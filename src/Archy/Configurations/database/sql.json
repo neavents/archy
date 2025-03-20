@@ -1,5 +1,23 @@
 {
     "postgresql":{
         
+    },
+    "mysql":{
+        
+    },
+    "mssql":{
+        
+    },
+    "ibmdb2":{
+        
+    },
+    "mariadb":{
+        
+    },
+    "oracle":{
+        
+    },
+    "sqlite":{
+        
     }
 }
