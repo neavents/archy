@@ -24,7 +24,7 @@
                             "needsIntermediatePackage": true
                         }
                     },
-                    "description": "serilog for loki"
+                    "description": "efcore for postgres"
                 },
                 "dapper": {
                     "supported": {
@@ -34,7 +34,7 @@
                             "needsIntermediatePackage": false
                         }
                     },
-                    "description": "promtail for loki"
+                    "description": "dapper for postgres"
                 }
             }
     }

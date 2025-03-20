@@ -1,0 +1,18 @@
+{
+    "efcore":{
+        "category": "database",
+        "subCategory": "sql",
+        "type": "tool",
+        "tags": [],
+        "install": {
+            "dotnet": {
+                "required": [
+                    {
+                        "package": "Microsoft.AspNetCore.EntityFrameworkCore"
+                    }
+                ],
+                "install-paths": ["src/projname.Infrastructure.Persistence."]
+            }
+        }
+    }
+}

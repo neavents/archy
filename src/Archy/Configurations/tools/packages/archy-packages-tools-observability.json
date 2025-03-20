@@ -1,0 +1,20 @@
+{
+    "serilog": {
+        "category": "observability",
+        "subCategory": "logging",
+        "type": "tool",
+        "install": {
+            "dotnet":{
+                "required":[
+                    {
+                        "package": "Serilog"
+                    },
+                    {
+                        "package": "Serilog.Sinks.Console"
+                    }
+                ],
+                "install-paths": ["src/projname.Web/projname.Web.csproj"]
+            }
+        }
+    }
+}
