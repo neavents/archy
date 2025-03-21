@@ -32,9 +32,13 @@
     <Folder Include="Configurations\messaging\impl\local\kafka\supported\go\src\" />
     <Folder Include="Configurations\messaging\impl\cloud\" />
     <Folder Include="Configurations\messaging\impl\local\memcached-pubsub\supported\dotnet\src\" />
+    <Folder Include="Configurations\misc\impl\" />
     <Folder Include="Configurations\resilience\packages\" />
-    <Folder Include="Interfaces\" />
-    <Folder Include="Services\" />
+    <Folder Include="Configurations\security\impl\auth\" />
+    <Folder Include="Configurations\security\impl\auth\keycloak\" />
+    <Folder Include="Configurations\security\impl\misc\anti-forgery\supported\" />
+    <Folder Include="Configurations\security\impl\secret-manager\" />
+    <Folder Include="Configurations\security\impl\secret-manager\hashicorp-vault\" />
   </ItemGroup>
 
 </Project>

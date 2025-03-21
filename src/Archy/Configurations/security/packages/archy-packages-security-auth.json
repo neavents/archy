@@ -1,0 +1,13 @@
+{
+    "keycloak": {
+
+    },
+    "dotnet": {
+        "identity": {
+
+        },
+        "jwt-bearer": {
+            
+        }
+    }
+}

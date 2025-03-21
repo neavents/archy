@@ -4,5 +4,8 @@
     },
     "sanitization":{
         
+    },
+    "anti-forgery": {
+        
     }
 }
