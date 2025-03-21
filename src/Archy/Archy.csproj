@@ -8,6 +8,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="Configurations/database/impl/nosql/dynamodb/" />
+    <Folder Include="Configurations/database/impl/nosql/mongodb/" />
+    <Folder Include="Configurations/database/impl/nosql/ravendb/" />
+    <Folder Include="Configurations/database/impl/nosql/scylladb/" />
     <Folder Include="Configurations\build\" />
     <Folder Include="Configurations\cdc\" />
     <Folder Include="Configurations\cdc\packages\" />
@@ -39,6 +43,8 @@
     <Folder Include="Configurations\security\impl\misc\anti-forgery\supported\" />
     <Folder Include="Configurations\security\impl\secret-manager\" />
     <Folder Include="Configurations\security\impl\secret-manager\hashicorp-vault\" />
+    <Folder Include="Domain/Entities/" />
+    <Folder Include="Domain/ValueObjects/" />
   </ItemGroup>
 
 </Project>
