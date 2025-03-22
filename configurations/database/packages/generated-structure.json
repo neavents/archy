@@ -1,0 +1,10 @@
+{
+    "postgresql":{
+        "namespace": "${ext_safeprojectname}.Infrastructure.Persistence.Hybrid.Sql.PostgreSQL",
+        "files":[
+            "PostgreSQLDbContext.cs",
+            "PostgreSQLRepository.cs",
+            "IPostgreSQLRepository.cs"
+        ]
+    }
+}

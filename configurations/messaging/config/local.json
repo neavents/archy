@@ -1,0 +1,20 @@
+{
+    "redis-pubsub":{
+        
+    },
+    "kafka":{
+        
+    },
+    "rabbitmq":{
+        
+    },
+    "activemq": {
+
+    },
+    "memcached-pubsub": {
+
+    },
+    "apache-pulsar":{
+        
+    }
+}

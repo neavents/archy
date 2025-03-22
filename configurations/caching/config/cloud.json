@@ -1,0 +1,11 @@
+{
+    "azure-cache-redis":{
+        
+    },
+    "aws-elasticache": {
+
+    },
+    "google-cloud-memorystore": {
+        
+    }
+}

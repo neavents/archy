@@ -1,0 +1,11 @@
+{
+    "cors":{
+        
+    },
+    "sanitization":{
+        
+    },
+    "anti-forgery": {
+        
+    }
+}

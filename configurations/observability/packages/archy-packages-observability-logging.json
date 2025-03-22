@@ -1,0 +1,93 @@
+{
+    "packages": {
+        "loki": {
+            "category": "observability",
+            "subCategory": "logging",
+            "type": "on-premise",
+            "scalability": "medium",
+            "tags": ["lightweight", "logging", "fast", "grafana"],
+            "install":{
+                "dotnet": {
+                    "package":"Serilog.Sinks.Grafana.Loki"}
+            },
+            "install-intermediate":{
+                "dotnet":[
+                    {
+                        "dependency": "serilog",
+                        "package": "Serilog.Sinks.Grafana.Loki"
+                    }
+                ]
+            },
+            "containerRequired": true,
+            "dependencyRequirementType": "or",
+            "dependencies": ["serilog", "promtail"],
+            "dependencyRules":{
+                "serilog": {
+                    "supported": {
+                        "dotnet":{
+                            "required": true,
+                            "condition": "how can you get logs from sink without serilog?",
+                            "needsIntermediatePackage": true
+                        },
+                        "ts": {
+                            "required": false,
+                            "condition": "we do not need that but it can be useful!",
+                            "needsIntermediatePackage": false
+                        }
+                    },
+                    "description": "serilog for loki"
+                },
+                "promtail": {
+                    "supported": {
+                        "dotnet":{
+                            "required": false,
+                            "condition": "you do not need promtail if you have serilog with loki sink",
+                            "needsIntermediatePackage": false
+                        },
+                        "ts": {
+                            "required": true,
+                            "condition": "promtail is the required library for ts!",
+                            "needsIntermediatePackage": false
+                        }
+                    },
+                    "description": "promtail for loki"
+                }
+            }
+        },
+        "elasticsearch": {
+            "category": "observability",
+            "subCategory": "logging",
+            "type": "on-premise",
+            "scalability": "high",
+            "tags": ["resource-hog", "logging", "enterprise", "kibana"],
+            "install-intermediate":{
+                "dotnet":[
+                    {
+                        "dependency": "elasticsearch",
+                        "package": "Serilog.Sinks.Elasticsearch"
+                    }
+                ]
+            },
+            "containerRequired": true,
+            "dependencyRequirementType": "or",
+            "dependencies": ["elasticsearch"],
+            "dependencyRules":{
+                "serilog": {
+                    "supported": {
+                        "dotnet":{
+                            "required": true,
+                            "condition": "how can you get logs from sink without serilog?",
+                            "needsIntermediatePackage": true
+                        },
+                        "ts": {
+                            "required": false,
+                            "condition": "we do not need that but it can be useful!",
+                            "needsIntermediatePackage": false
+                        }
+                    },
+                    "description": "serilog for elasticsearch"
+                }
+            }
+        }
+    }
+}

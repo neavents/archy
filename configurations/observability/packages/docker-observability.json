@@ -1,0 +1,13 @@
+{
+    "loki":{
+        "image": "grafana/loki:latest",
+        "containerName": "loki",
+        "ports": ["3100:3100"],
+        "volumes": [".loki-config.yaml:/etc/loki/local-config.yaml"],
+        "env": ["LOKI_MODE=simple"]
+    },
+    "elasticsearch":{
+        "image":"",
+        "containerName": "elasticsearch-logging"
+    }
+}

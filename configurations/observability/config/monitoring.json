@@ -1,0 +1,16 @@
+{
+    "grafana": {
+        "compatible":{
+            "tracing": ["jaeger", "zipkin"],
+            "logging": ["loki"],
+            "metrics": ["prometheus"]
+        },
+        "description": ""
+    },
+    "kibana": {
+        "compatible":{
+            "logging": ["elasticsearch"]
+        },
+        "description": ""
+    }
+}

@@ -1,0 +1,20 @@
+{
+    "opentelemetry-jaeger": {
+        "compatible": {
+            "monitoring": ["jaegerUI", "grafana"]
+        },
+        "description": ""
+    },
+    "opentelemetry-zipkin": {
+        "compatible": {
+            "monitoring": ["zipkinUI", "grafana"]
+        },
+        "description": ""
+    },
+    "awsXRay": {
+        "compatible": {
+            "monitoring": ["awsCloudWatchDashboards"]
+        },
+        "description": ""
+    }
+}

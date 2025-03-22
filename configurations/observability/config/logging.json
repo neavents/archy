@@ -1,0 +1,12 @@
+{
+    "loki": { 
+        "compatible": {
+            "monitoring": ["grafana"]
+        }
+    },
+    "elasticsearch": {
+        "compatible": {
+            "monitoring": ["kibana"]
+        }
+    }
+}

@@ -1,0 +1,17 @@
+{
+    "prometheus": {
+        "compatible": {
+            "monitoring": ["grafana"]
+        }
+    },
+    "datadog": {
+        "compatible": {
+            "monitoring": ["datadogDashboards"]
+        }
+    },
+    "azureMonitor": {
+        "compatible":{
+            "monitoring": ["azureMonitDashboards"]
+        }
+    }
+}

@@ -1,0 +1,12 @@
+{
+    "dotnet":{
+        "install": "add package",
+        "remove": "remove package",
+        "restore": "restore"
+    },
+    "npm": {
+        "install": "install",
+        "remove": "remove",
+        "restore": "install"
+    }
+}

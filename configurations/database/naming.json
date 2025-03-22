@@ -1,0 +1,6 @@
+{
+    "dotnet": {
+        "project-name": "Infrastructure",
+        "prefix-name": "Persistence"
+    }
+}
