@@ -6,4 +6,12 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Tracking\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Archy.Domain\Archy.Domain.csproj" />
+  </ItemGroup>
+
 </Project>

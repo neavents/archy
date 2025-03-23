@@ -10,4 +10,8 @@
     <Folder Include="Helpers\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Archy.Application.Contracts\Archy.Application.Contracts.csproj" />
+  </ItemGroup>
+
 </Project>
