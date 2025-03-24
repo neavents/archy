@@ -7,4 +7,5 @@ public interface IRegistry<T>
     public void Add(T item);
     public T? Get(string key);
     public IReadOnlyList<T> GetAll();
+    public bool ContainsKey(string key);
 }

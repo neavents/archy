@@ -16,6 +16,11 @@ public class ExecutorRegistry : IRegistry<IRuleExecutor>
         _executors.Add(item.RuleKey, item);
     }
 
+    public bool ContainsKey(string key)
+    {
+        return _executors.ContainsKey(key);
+    }
+
     public IRuleExecutor? Get(string key)
     {
         if (_executors.TryGetValue(key, out IRuleExecutor? executor)){

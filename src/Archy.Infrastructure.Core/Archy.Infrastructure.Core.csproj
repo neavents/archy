@@ -8,7 +8,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Archy.Application.Contracts\Archy.Application.Contracts.csproj" />
-    <ProjectReference Include="..\Archy.Infrastructure.Core\Archy.Infrastructure.Core.csproj" />
   </ItemGroup>
 
 </Project>
