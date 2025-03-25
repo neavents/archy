@@ -11,18 +11,31 @@ public class TrackedImplementation : TrackedBase
     public required string Path {get; init;}
     public required JsonElement ImplementationJson {get; init;}
 
-    public TrackedImplementation(TrackedDomain trackedDomain, TrackedCategory trackedCategory, string path, JsonElement implementationJson){
+    public TrackedImplementation(string implementationName, TrackedDomain trackedDomain, TrackedCategory trackedCategory, string path, JsonElement implementationJson) : base(implementationName){
         Domain = trackedDomain;
         Category = trackedCategory;
         Path = path;
         ImplementationJson = implementationJson;
-    
+
+        CheckCompatibility();
     }
 
-    public void CheckDomainCompatibility(TrackedDomain? trackedDomain = null){
+    private void CheckDomainCompatibility(TrackedDomain? trackedDomain = null){
         if(trackedDomain is not null){
-            bool comp = trackedDomain.Name == Domain.Name;
-            if(!comp) throw new InvalidOperationException();
+            Domain.CheckCompatibility(trackedDomain);
         }
+    }
+
+    private void CheckCategoryDomainCompatibility(TrackedDomain? trackedDomain = null){
+        if(trackedDomain is not null) {
+            Category.CheckDomainCompatibility(trackedDomain);
+        }
+
+        Category.CheckDomainCompatibility(Domain);
+    }
+    
+    public void CheckCompatibility(TrackedDomain? trackedDomain = null){
+        CheckDomainCompatibility(trackedDomain);
+        CheckCategoryDomainCompatibility(trackedDomain);
     }
 }

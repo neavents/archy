@@ -14,7 +14,7 @@ public class TrackedTool : TrackedBase
 
     public required List<TrackedImplementation> Implementations {get; init;}
 
-    public TrackedTool(TrackedCategory trackedCategory, TrackedDomain trackedDomain, string path, JsonElement usageJson, List<TrackedImplementation> trackedImplementations){
+    public TrackedTool(string toolName, TrackedCategory trackedCategory, TrackedDomain trackedDomain, string path, JsonElement usageJson, List<TrackedImplementation> trackedImplementations) : base(toolName){
         Category = trackedCategory;
         Domain = trackedDomain;
         Path = path;
@@ -24,16 +24,20 @@ public class TrackedTool : TrackedBase
         CheckCompatibility();
     }
 
-    private void CheckCategoryCompatibility(){
-
-    }
-
     private void CheckPath(){
 
     }
 
     private void CheckImplementationsCompatibilty(){
+        foreach(TrackedImplementation implementation in Implementations){
+            implementation.CheckCompatibility(Domain);
+        }
+    }
 
+    private void CheckImplementationsCompatibilty(TrackedDomain trackedDomain){
+        foreach(TrackedImplementation implementation in Implementations){
+            implementation.CheckCompatibility(trackedDomain);
+        }
     }
 
     private void CheckNamingCompatibility(){
@@ -41,7 +45,7 @@ public class TrackedTool : TrackedBase
     }
 
     public void CheckCompatibility(){
-        CheckCategoryCompatibility();
+        Category.CheckDomainCompatibility(Domain);
         CheckPath();
         CheckImplementationsCompatibilty();
         CheckNamingCompatibility();

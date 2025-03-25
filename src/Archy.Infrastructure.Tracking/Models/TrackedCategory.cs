@@ -7,4 +7,13 @@ public class TrackedCategory : TrackedBase
 {
     public required TrackedDomain Domain {get; init;}
     public required string Path {get; init;}
+
+    public TrackedCategory(TrackedDomain trackedDomain, string path, string categoryName) : base(categoryName){
+        Domain = trackedDomain;
+        Path = path;
+    }
+
+    public void CheckDomainCompatibility(TrackedDomain trackedDomain){
+        Domain.CheckCompatibility(trackedDomain);
+    }
 }
