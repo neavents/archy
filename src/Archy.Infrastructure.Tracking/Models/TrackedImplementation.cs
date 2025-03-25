@@ -20,13 +20,13 @@ public class TrackedImplementation : TrackedBase
         CheckCompatibility();
     }
 
-    private void CheckDomainCompatibility(TrackedDomain? trackedDomain = null){
+    private void checkDomainCompatibility(TrackedDomain? trackedDomain = null){
         if(trackedDomain is not null){
             Domain.CheckCompatibility(trackedDomain);
         }
     }
 
-    private void CheckCategoryDomainCompatibility(TrackedDomain? trackedDomain = null){
+    private void checkCategoryDomainCompatibility(TrackedDomain? trackedDomain = null){
         if(trackedDomain is not null) {
             Category.CheckDomainCompatibility(trackedDomain);
         }
@@ -35,7 +35,7 @@ public class TrackedImplementation : TrackedBase
     }
     
     public void CheckCompatibility(TrackedDomain? trackedDomain = null){
-        CheckDomainCompatibility(trackedDomain);
-        CheckCategoryDomainCompatibility(trackedDomain);
+        checkDomainCompatibility(trackedDomain);
+        checkCategoryDomainCompatibility(trackedDomain);
     }
 }

@@ -16,10 +16,22 @@ public class TrackedPackage : TrackedBase
         Domain = trackedDomain;
         Path = path;
         ConfigurationJson = configurationJson;
+
+        CheckCompatibility();
     }
 
+    private void checkPath(){
+
+    }
     public void CheckCompatibility(){
-        
+        Category.CheckDomainCompatibility(Domain);
+        checkPath();
+    }
+
+    public void CheckCompatibility(TrackedDomain trackedDomain){
+        Category.CheckDomainCompatibility(trackedDomain);
+        Domain.CheckCompatibility(trackedDomain);
+        checkPath();
     }
 
 }

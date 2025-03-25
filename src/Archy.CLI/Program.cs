@@ -1,4 +1,13 @@
-﻿Console.WriteLine("Hello, World!");
+﻿using Archy.CLI.Services;
+using Microsoft.Extensions.Hosting;
+using Archy.Application;
+using Archy.Infrastructure.Core;
+using Archy.Infrastructure.Execution;
+using Archy.Infrastructure.Selecting;
+using Archy.Infrastructure.Tracking;
+
+
+Console.WriteLine("Hello, World!");
 
 // {
 //      loki: {
@@ -28,8 +37,21 @@
 
 //ask for observability
 //if yes 
-        //ask for picking one: file, loki, seq, elasticsearch (elk), Azure App insights, Aws cloudwatch, Google Cloud Logging, Postgres, MongoDB, Splunk, No extra logging (short circuit)
-        //install and configure, then ask user is it okay or do you want to choose extra one
-        //if yes repeat
+//ask for picking one: file, loki, seq, elasticsearch (elk), Azure App insights, Aws cloudwatch, Google Cloud Logging, Postgres, MongoDB, Splunk, No extra logging (short circuit)
+//install and configure, then ask user is it okay or do you want to choose extra one
+//if yes repeat
 
-        //ask for monitoring
+//ask for monitoring
+
+HostApplicationBuilder builder = Host.CreateApplicationBuilder(args);
+
+builder.Services.AddApplication();
+builder.Services.AddCoreInfrastructure()
+                .AddExecution()
+                .AddSelecting()
+                .AddTracking();
+
+using IHost host = builder.Build();
+
+EntryPoint app = new(host.Services);
+app.Run();

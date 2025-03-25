@@ -13,6 +13,11 @@ public class DomainRegistry : IRegistry<TrackedDomain>
         
     }
 
+    public bool ContainsKey(string key)
+    {
+        throw new NotImplementedException();
+    }
+
     public TrackedDomain? Get(string key)
     {
         throw new NotImplementedException();

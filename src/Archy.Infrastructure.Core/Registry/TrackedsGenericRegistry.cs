@@ -34,4 +34,8 @@ public class TrackedsGenericRegistry<T> : IRegistry<T> where T : TrackedBase
     public bool ContainsKey(string key){
         return _kps.ContainsKey(key);
     }
+
+    public bool ContainsValue(T value){
+        return _kps.ContainsValue(value);
+    }
 }
