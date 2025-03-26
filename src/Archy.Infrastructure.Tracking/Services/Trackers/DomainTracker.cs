@@ -9,6 +9,7 @@ public class DomainTracker : IDependencyTracker<TrackedDomain>
     public ValueTask<List<TrackedDomain>> Track()
     {
         
-        throw new NotImplementedException();
+        //Open the configurations directory
+        //each subdirectory is domain
     }
 }

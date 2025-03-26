@@ -5,6 +5,7 @@ using Archy.Infrastructure.Core;
 using Archy.Infrastructure.Execution;
 using Archy.Infrastructure.Selecting;
 using Archy.Infrastructure.Tracking;
+using Microsoft.Extensions.Configuration;
 
 
 Console.WriteLine("Hello, World!");
@@ -44,6 +45,8 @@ Console.WriteLine("Hello, World!");
 //ask for monitoring
 
 HostApplicationBuilder builder = Host.CreateApplicationBuilder(args);
+
+builder.Configuration.SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
 
 builder.Services.AddApplication();
 builder.Services.AddCoreInfrastructure()
