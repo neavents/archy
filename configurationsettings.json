@@ -1,0 +1,26 @@
+{
+    "Path": "./configurations",
+    "Wildcard": "*",
+    "Domain": {
+        "Path": "/*"
+    },
+    "Implementation": {
+        "Path": "/*/impl"
+    },
+    "Naming": {
+        "Paths": {
+            "Domain": "/*/naming.json",
+            "General": "/naming.json"
+        }
+    },
+    "Package": {
+        "Path": "/*/packages/*.json"
+    },
+    "Tool": {
+        "Paths": {
+            "Configuration": "/*/config/*.json",
+            "Actual": "/*/impl/*/",
+            "Usage": "/*/impl/*/usage.json"
+        }
+    }
+}

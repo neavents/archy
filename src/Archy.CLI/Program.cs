@@ -6,9 +6,7 @@ using Archy.Infrastructure.Execution;
 using Archy.Infrastructure.Selecting;
 using Archy.Infrastructure.Tracking;
 using Microsoft.Extensions.Configuration;
-
-
-Console.WriteLine("Hello, World!");
+using Archy.CLI;
 
 // {
 //      loki: {
@@ -46,7 +44,7 @@ Console.WriteLine("Hello, World!");
 
 HostApplicationBuilder builder = Host.CreateApplicationBuilder(args);
 
-builder.Configuration.SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
+ConfigurationLoader.Load(builder);
 
 builder.Services.AddApplication();
 builder.Services.AddCoreInfrastructure()
