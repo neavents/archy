@@ -21,6 +21,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Archy.Application.Contracts
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Archy.Infrastructure.Core", "src\Archy.Infrastructure.Core\Archy.Infrastructure.Core.csproj", "{D9E782F9-AC05-47AC-8BD6-9F8B160BDCA3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharedKernel", "src\SharedKernel\SharedKernel.csproj", "{F64CC98C-BBC9-4FA8-AD0F-2DF2C2112EE7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -59,6 +61,10 @@ Global
 		{D9E782F9-AC05-47AC-8BD6-9F8B160BDCA3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D9E782F9-AC05-47AC-8BD6-9F8B160BDCA3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D9E782F9-AC05-47AC-8BD6-9F8B160BDCA3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F64CC98C-BBC9-4FA8-AD0F-2DF2C2112EE7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F64CC98C-BBC9-4FA8-AD0F-2DF2C2112EE7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F64CC98C-BBC9-4FA8-AD0F-2DF2C2112EE7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F64CC98C-BBC9-4FA8-AD0F-2DF2C2112EE7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -72,5 +78,6 @@ Global
 		{800F46A0-6830-4083-A0E8-24065479CBCA} = {70B2F385-4ACA-4E17-A004-A62323047B35}
 		{55E50C24-0F81-43E5-9788-8ABACDB9E3CF} = {70B2F385-4ACA-4E17-A004-A62323047B35}
 		{D9E782F9-AC05-47AC-8BD6-9F8B160BDCA3} = {70B2F385-4ACA-4E17-A004-A62323047B35}
+		{F64CC98C-BBC9-4FA8-AD0F-2DF2C2112EE7} = {70B2F385-4ACA-4E17-A004-A62323047B35}
 	EndGlobalSection
 EndGlobal
