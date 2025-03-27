@@ -4,7 +4,7 @@ namespace Archy.Application.Contracts.Core;
 
 public interface IRegistry<T>
 {
-    public void Add(T item);
+    public void Add(T item, Func<T, string> keySelector);
     public T? Get(string key);
     public IReadOnlyList<T> GetAll();
     public bool ContainsKey(string key);

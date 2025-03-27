@@ -1,9 +1,10 @@
 using System;
 using Archy.Application.Contracts.Core;
+using Archy.Application.Contracts.Generic;
 
 namespace Archy.Application.Contracts.Execution;
 
-public interface IExecutionPlugin
+public interface IExecutionPlugin : IPluginRegister<IRuleExecutor>
 {
-    public void Register(IRegistry<IRuleExecutor> ruleRegistry);
+    
 }

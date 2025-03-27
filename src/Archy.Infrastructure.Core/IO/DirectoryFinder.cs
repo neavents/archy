@@ -4,14 +4,17 @@ using System.Collections.Generic;
 using System.Linq;
 using DotNet.Globbing;
 using DotNet.Globbing.Token;
+using Archy.Application.Contracts.Core;
+using Archy.Infrastructure.Core.Models.Globbing;
 
 namespace Archy.Infrastructure.Core.IO;
 
 public class DirectoryFinder : IDirectoryFinder
 {
+
     public Task Find(string searchKey)
     {
-        
+
     }
 
     public IEnumerable<string> FindPaths(

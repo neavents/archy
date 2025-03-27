@@ -2,7 +2,7 @@ using System;
 
 namespace Archy.Application.Contracts.Core.IO;
 
-public interface IFileSystemSearch
+public interface IFileSystemService
 {
     public void CheckDirectoryExists(string path);
     
