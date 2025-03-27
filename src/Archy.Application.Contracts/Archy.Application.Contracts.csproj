@@ -7,12 +7,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Core\IO\" />
     <Folder Include="Tracking\" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Archy.Domain\Archy.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="DotNet.Glob" Version="3.1.3" />
   </ItemGroup>
 
 </Project>
