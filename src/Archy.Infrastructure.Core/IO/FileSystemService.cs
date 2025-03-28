@@ -1,26 +1,36 @@
 using System;
 using Archy.Application.Contracts.Core.IO;
+using Microsoft.Extensions.Logging;
 
 namespace Archy.Infrastructure.Core.IO;
 
 public class FileSystemService : IFileSystemService
 {
+    private readonly ILogger<FileSystemService> _logger;
+
+    public FileSystemService(ILogger<FileSystemService> logger){
+        _logger = logger;
+    }
     public void CheckDirectoryExists(string path)
     {
-        throw new NotImplementedException();
+        if (!Directory.Exists(path))
+        {
+            var ex = new DirectoryNotFoundException();
+            _logger.LogError(ex, "Can not find directory at {path}", path);
+            throw ex;
+        }
     }
 
     public IEnumerable<string> IterateFileSystem(string path, string pattern, EnumerationOptions enumerationOptions)
     {
-        IEnumerable<string> entries;
         try
         {
-            entries = Directory.EnumerateFileSystemEntries(path, pattern, enumerationOptions);
+            return Directory.EnumerateFileSystemEntries(path, pattern, enumerationOptions);
         }
-        catch (Exception ex) when (ex is DirectoryNotFoundException || ex is UnauthorizedAccessException)
+        catch (Exception ex)
         {
-             yield break;
+             _logger.LogError(ex, "Error while Enumerating filesystem entries");
+             throw;
         }
-        return entries;
     }
 }

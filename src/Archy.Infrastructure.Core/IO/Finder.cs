@@ -1,8 +1,10 @@
 using System;
 using Archy.Application.Contracts.Core.IO;
+using Archy.Application.Contracts.Core.IO.Globbing;
 using Archy.Application.Contracts.Core.IO.Helpers;
 using Archy.Infrastructure.Core.Models.Globbing;
 using DotNet.Globbing;
+using Microsoft.Extensions.Logging;
 using SharedKernel.Infrastructure.Core.Models.Globbing;
 
 namespace Archy.Infrastructure.Core.IO;
@@ -10,65 +12,40 @@ namespace Archy.Infrastructure.Core.IO;
 public class Finder : IFinder
 {
     private readonly IFileSystemHelper _fileSystemHelper;
+    private readonly IFileSystemService _fileSystemService;
+    private readonly IGlobFactory _globFactory;
+    private readonly ILogger<Finder> _logger;
 
-    public Finder(IFileSystemHelper fileSystemHelper){
+    public Finder(IFileSystemHelper fileSystemHelper, IFileSystemService fileSystemService, IGlobFactory globFactory, ILogger<Finder> logger)
+    {
         _fileSystemHelper = fileSystemHelper;
+        _fileSystemService = fileSystemService;
+        _globFactory = globFactory;
+        _logger = logger;
     }
 
-    public Task<IEnumerable<string>> FindAndMatchAsync()
+    public IEnumerable<HierarchicalGlobResult> FindAndMatchAsync(string rootPath, string pattern, bool caseSensitive)
     {
-        throw new NotImplementedException();
+        string cleanRelativePattern = pattern.TrimStart('/', '\\');
+
+        Glob glob = _globFactory.Create(new() { Evaluation = { CaseInsensitive = !caseSensitive } }, cleanRelativePattern);
+        
+        IEnumerable<string> entries = FindAsync(rootPath);
+
+        return GlobMatchAsync(pattern, rootPath, glob, entries);
     }
 
-    public Task<IEnumerable<string>> FindAsync(string searchKey)
+    public IEnumerable<string> FindAsync(string rootPath)
     {
-        string fullRootDirectory = Path.GetFullPath(rootDirectory);
-        if (!Directory.Exists(fullRootDirectory))
-        {
-            // Consider logging this
-            yield break;
-        }
+        string fullRootDirectory = Path.GetFullPath(rootPath);
 
-        // Prepare the relative pattern
-        string cleanRelativePattern = relativePattern.TrimStart('/', '\\');
+        _fileSystemService.CheckDirectoryExists(fullRootDirectory);
 
-        // Parse the glob pattern
-        var globOptions = new GlobOptions
-        {
-            Evaluation = { CaseInsensitive = !caseSensitive },
-            Comparison = { MatchFullPath = true } // Match against the whole relative path
-        };
-        Glob glob;
-        try
-        {
-            glob = Glob.Parse(cleanRelativePattern, globOptions);
-        }
-        catch (FormatException ex)
-        {
-             Console.WriteLine($"Error: Invalid glob pattern '{cleanRelativePattern}'. {ex.Message}");
-             yield break; // Stop processing this pattern
-        }
-
-        // Determine MatchType based on pattern ending (heuristic)
-
-        var searchOptions = new EnumerationOptions
-        {
-            IgnoreInaccessible = true,
-            RecurseSubdirectories = true, // Necessary for patterns like */impl/*
-        };
-
-        IEnumerable<string> entries;
-        try
-        {
-            entries = Directory.EnumerateFileSystemEntries(fullRootDirectory, "*", searchOptions);
-        }
-        catch (Exception ex) when (ex is DirectoryNotFoundException || ex is UnauthorizedAccessException)
-        {
-             yield break;
-        }
+        IEnumerable<string> entries = _fileSystemService.IterateFileSystem(fullRootDirectory, "*", new() { IgnoreInaccessible = true, RecurseSubdirectories = true });
+        return entries;
     }
 
-    public IEnumerable<HierarchicalGlobResult> GlobMatchAsync(string relativePattern, string rootDirectory, IEnumerable<string> entries, Glob glob)
+    public IEnumerable<HierarchicalGlobResult> GlobMatchAsync(string relativePattern, string rootDirectory, Glob glob, IEnumerable<string> entries)
     {
         var patternSegments = relativePattern.TrimEnd('/').Split('/');
 
@@ -84,11 +61,11 @@ public class Finder : IFinder
             // Let's assume non-'/' patterns primarily target files.
             if (!relativePattern.EndsWith('/') && entryIsDirectory)
             {
-                 // Exception: If the very last segment is just "*", allow directory match
-                 if (!(patternSegments.LastOrDefault() == "*"))
-                 {
-                     continue;
-                 }
+                // Exception: If the very last segment is just "*", allow directory match
+                if (!(patternSegments.LastOrDefault() == "*"))
+                {
+                    continue;
+                }
             }
 
             string matchPath = _fileSystemHelper.ConvertToMatchPath(rootDirectory, fullPath);
@@ -100,9 +77,9 @@ public class Finder : IFinder
                 List<string> capturedSegments = _fileSystemHelper.ExtractMatchingSegments(patternSegments, pathSegments);
 
                 yield return new HierarchicalGlobResult(
-                    relativePattern, // Use the cleaned pattern
+                    relativePattern,
                     fullPath,
-                    matchPath, // Use the '/' separated relative path
+                    matchPath,
                     capturedSegments,
                     entryIsDirectory
                 );

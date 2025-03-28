@@ -13,12 +13,12 @@ public class GlobFactory : IGlobFactory
     public GlobFactory(ILogger<GlobFactory> logger){
         _logger = logger;
     }
-    public async ValueTask<Glob> Create(GlobOptions? opts1, string? finderPattern)
+    public Glob Create(GlobOptions? opts1, string? finderPattern)
     {
         try{
             return Glob.Parse(finderPattern, opts1);
         } catch (Exception ex){
-            _logger.LogError(ex, $"Can not parse Glob with this: {finderPattern}");
+            _logger.LogError(ex, "Can not parse Glob with this pattern: {pattern}", finderPattern);
             throw;
         }
     }
