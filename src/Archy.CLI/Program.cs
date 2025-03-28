@@ -7,6 +7,7 @@ using Archy.Infrastructure.Selecting;
 using Archy.Infrastructure.Tracking;
 using Microsoft.Extensions.Configuration;
 using Archy.CLI;
+using Serilog;
 
 // {
 //      loki: {
@@ -45,6 +46,9 @@ using Archy.CLI;
 HostApplicationBuilder builder = Host.CreateApplicationBuilder(args);
 
 ConfigurationLoader.Load(builder);
+
+Log.Logger = LoggingSetup.SerilogConfiguration(builder.Configuration);
+builder.Services.AddSerilogSetup();
 
 builder.Services.AddApplication();
 builder.Services.AddCoreInfrastructure()

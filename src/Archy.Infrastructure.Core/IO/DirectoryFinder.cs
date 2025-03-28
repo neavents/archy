@@ -109,4 +109,136 @@ public class DirectoryFinder : IDirectoryFinder
             }
         }
     }
+
+    public static IEnumerable<HierarchicalGlobResult> FindPathsAndSegments(
+        string rootDirectory,
+        string relativePattern,
+        bool caseSensitive = true)
+    {
+        string fullRootDirectory = Path.GetFullPath(rootDirectory);
+        if (!Directory.Exists(fullRootDirectory))
+        {
+            // Consider logging this
+            yield break;
+        }
+
+        // Prepare the relative pattern
+        string cleanRelativePattern = relativePattern.TrimStart('/', '\\');
+
+        // Parse the glob pattern
+        var globOptions = new GlobOptions
+        {
+            Evaluation = { CaseInsensitive = !caseSensitive },
+            Comparison = { MatchFullPath = true } // Match against the whole relative path
+        };
+        Glob glob;
+        try
+        {
+            glob = Glob.Parse(cleanRelativePattern, globOptions);
+        }
+        catch (FormatException ex)
+        {
+             Console.WriteLine($"Error: Invalid glob pattern '{cleanRelativePattern}'. {ex.Message}");
+             yield break; // Stop processing this pattern
+        }
+
+        // Determine MatchType based on pattern ending (heuristic)
+
+        var searchOptions = new EnumerationOptions
+        {
+            IgnoreInaccessible = true,
+            RecurseSubdirectories = true, // Necessary for patterns like */impl/*
+        };
+
+        IEnumerable<string> entries;
+        try
+        {
+            entries = Directory.EnumerateFileSystemEntries(fullRootDirectory, "*", searchOptions);
+        }
+        catch (Exception ex) when (ex is DirectoryNotFoundException || ex is UnauthorizedAccessException)
+        {
+             yield break;
+        }
+
+        // Split pattern for segment extraction logic
+        // Note: This simple split works well for patterns like */*/*.json
+        // but wouldn't handle more complex globs like ** correctly for extraction.
+        var patternSegments = cleanRelativePattern.TrimEnd('/').Split('/');
+
+
+        // --- Filter and Extract ---
+        foreach (string fullPath in entries)
+        {
+            bool entryIsDirectory = Directory.Exists(fullPath); // Check actual type
+
+            // Basic type filtering based on pattern intention
+            if (expectedType == MatchType.Directories && !entryIsDirectory) continue;
+            // If pattern doesn't end in '/' but we found a directory, skip if user likely wants files
+            // This is slightly ambiguous, adjust if needed. Maybe add explicit File/Directory mode?
+            // Let's assume non-'/' patterns primarily target files.
+            if (!cleanRelativePattern.EndsWith('/') && entryIsDirectory)
+            {
+                 // Exception: If the very last segment is just "*", allow directory match
+                 if (!(patternSegments.LastOrDefault() == "*"))
+                 {
+                     continue;
+                 }
+            }
+
+            string relativePath = Path.GetRelativePath(fullRootDirectory, fullPath);
+            string matchPath = relativePath.Replace(Path.DirectorySeparatorChar, '/');
+
+            if (glob.IsMatch(matchPath))
+            {
+                // --- Segment Extraction ---
+                var pathSegments = matchPath.TrimEnd('/').Split('/');
+                var capturedSegments = ExtractMatchingSegments(patternSegments, pathSegments);
+
+                yield return new HierarchicalGlobResult(
+                    cleanRelativePattern, // Use the cleaned pattern
+                    fullPath,
+                    matchPath, // Use the '/' separated relative path
+                    capturedSegments,
+                    entryIsDirectory
+                );
+            }
+        }
+    }
+
+    /// <summary>
+    /// Extracts segments from the path that correspond to wildcard segments in the pattern.
+    /// Assumes pattern uses '*' to match single directory/file names.
+    /// </summary>
+    private static List<string> ExtractMatchingSegments(string[] patternSegments, string[] pathSegments)
+    {
+        var captured = new List<string>();
+        int maxCommonDepth = Math.Min(patternSegments.Length, pathSegments.Length);
+
+        for (int i = 0; i < maxCommonDepth; i++)
+        {
+            // If the pattern segment at this position contains a wildcard
+            // capture the corresponding path segment.
+            // This simple check works for '*' and '*.json'.
+            if (patternSegments[i].Contains('*') || patternSegments[i].Contains('?'))
+            {
+                // Perform a quick check that this path segment actually matches the pattern segment
+                // This adds robustness, e.g., ensures "*.json" only captures ".json" files.
+                var segmentGlob = Glob.Parse(patternSegments[i], new GlobOptions{ Comparison = { MatchFullPath = true }});
+                if(segmentGlob.IsMatch(pathSegments[i]))
+                {
+                    captured.Add(pathSegments[i]);
+                }
+                // If segmentGlob doesn't match, something is wrong with assumptions,
+                // but the full glob matched, so maybe skip capture? Or log warning?
+                // For robustness with simple '*' case, let's capture anyway if it's just '*'
+                else if (patternSegments[i] == "*")
+                {
+                    captured.Add(pathSegments[i]);
+                }
+            }
+            // NOTE: This logic does NOT correctly handle "**" capture. It assumes
+            // wildcards like "*" map to exactly one path segment.
+        }
+        return captured;
+    }
 }
