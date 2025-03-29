@@ -46,6 +46,7 @@ using Serilog;
 HostApplicationBuilder builder = Host.CreateApplicationBuilder(args);
 
 ConfigurationLoader.Load(builder);
+OptionsSetup.Configure(builder.Services, builder.Configuration);
 
 Log.Logger = LoggingSetup.SerilogConfiguration(builder.Configuration);
 builder.Services.AddSerilogSetup();

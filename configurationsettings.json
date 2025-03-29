@@ -1,26 +1,30 @@
 {
-    "Path": "./configurations",
-    "Wildcard": "*",
-    "Domain": {
-        "Path": "/*"
-    },
-    "Implementation": {
-        "Path": "/*/impl"
-    },
-    "Naming": {
-        "Paths": {
-            "Domain": "/*/naming.json",
-            "General": "/naming.json"
-        }
-    },
-    "Package": {
-        "Path": "/*/packages/*.json"
-    },
-    "Tool": {
-        "Paths": {
-            "Configuration": "/*/config/*.json",
-            "Actual": "/*/impl/*/",
-            "Usage": "/*/impl/*/usage.json"
+    "Configuration":{
+        "Root": {
+            "Pattern": "./configurations",
+            "Wildcard": "*"
+        },
+        "Domain": {
+            "Pattern": "/*"
+        },
+        "Implementation": {
+            "Pattern": "/*/impl"
+        },
+        "Naming": {
+            "Patterns": {
+                "Domain": "/*/naming.json",
+                "General": "/naming.json"
+            }
+        },
+        "Package": {
+            "Pattern": "/*/packages/*.json"
+        },
+        "Tool": {
+            "Patterns": {
+                "Configuration": "/*/config/*.json",
+                "Actual": "/*/impl/*/",
+                "Usage": "/*/impl/*/usage.json"
+            }
         }
     }
 }
