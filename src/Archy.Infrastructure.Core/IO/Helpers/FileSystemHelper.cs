@@ -1,4 +1,5 @@
 using System;
+using Archy.Application.Contracts.Core.IO.Globbing;
 using Archy.Application.Contracts.Core.IO.Helpers;
 using DotNet.Globbing;
 
@@ -6,6 +7,12 @@ namespace Archy.Infrastructure.Core.IO.Helpers;
 
 public class FileSystemHelper : IFileSystemHelper
 {
+    private readonly IGlobFactory _globFactory;
+
+    public FileSystemHelper(IGlobFactory globFactory){
+        _globFactory = globFactory;
+    }
+
     public string ConvertToMatchPath(string rootDirectory, string fullPath)
     {
         string relativePath = Path.GetRelativePath(rootDirectory, fullPath);
@@ -14,20 +21,18 @@ public class FileSystemHelper : IFileSystemHelper
 
     public List<string> ExtractMatchingSegments(string[] patternSegments, string[] pathSegments)
     {
-       var captured = new List<string>();
-        int maxCommonDepth = Math.Min(patternSegments.Length, pathSegments.Length);
+        List<string> captured = [];
 
-        for (int i = 0; i < maxCommonDepth; i++)
+        int maxDepth = Math.Min(patternSegments.Length, pathSegments.Length);
+        for (int i = 0; i < maxDepth; i++)
         {
-            // If the pattern segment at this position contains a wildcard
-            // capture the corresponding path segment.
-            // This simple check works for '*' and '*.json'.
             if (patternSegments[i].Contains('*') || patternSegments[i].Contains('?'))
             {
                 // Perform a quick check that this path segment actually matches the pattern segment
                 // This adds robustness, e.g., ensures "*.json" only captures ".json" files.
-                var segmentGlob = Glob.Parse(patternSegments[i], new GlobOptions{ Comparison = { MatchFullPath = true }});
-                if(segmentGlob.IsMatch(pathSegments[i]))
+                Glob glob = _globFactory.Create(new(){Evaluation = {CaseInsensitive = true}}, patternSegments[i]);
+        
+                if(glob.IsMatch(pathSegments[i]))
                 {
                     captured.Add(pathSegments[i]);
                 }
