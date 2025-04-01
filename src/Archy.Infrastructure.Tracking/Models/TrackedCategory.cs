@@ -5,8 +5,8 @@ namespace Archy.Infrastructure.Tracking.Models;
 
 public class TrackedCategory : TrackedBase
 {
-    public required TrackedDomain Domain {get; init;}
-    public required string Path {get; init;}
+    public TrackedDomain Domain {get; init;}
+    public string Path {get; init;}
 
     public TrackedCategory(TrackedDomain trackedDomain, string path, string categoryName) : base(categoryName){
         Domain = trackedDomain;

@@ -6,8 +6,8 @@ namespace Archy.Infrastructure.Tracking.Models;
 
 public class TrackedName : TrackedBase
 {
-    public required string CodeName {get; init;}
-    public required JsonElement RuleJson {get; init;}
+    public string CodeName {get; init;}
+    public JsonElement RuleJson {get; init;}
 
     public TrackedName(string name, string codeName, JsonElement ruleJson) : base(name){
         CodeName = codeName;

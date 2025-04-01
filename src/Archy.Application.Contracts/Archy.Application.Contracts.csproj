@@ -7,10 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Tracking\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Archy.Domain\Archy.Domain.csproj" />
     <ProjectReference Include="..\SharedKernel\SharedKernel.csproj" />
   </ItemGroup>

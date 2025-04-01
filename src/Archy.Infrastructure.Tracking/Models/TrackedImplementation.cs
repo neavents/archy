@@ -6,10 +6,10 @@ namespace Archy.Infrastructure.Tracking.Models;
 
 public class TrackedImplementation : TrackedBase
 {
-    public required TrackedDomain Domain {get; init;}
-    public required TrackedCategory Category {get; init;}
-    public required string Path {get; init;}
-    public required JsonElement ImplementationJson {get; init;}
+    public TrackedDomain Domain {get; init;}
+    public TrackedCategory Category {get; init;}
+    public string Path {get; init;}
+    public JsonElement ImplementationJson {get; init;}
 
     public TrackedImplementation(string implementationName, TrackedDomain trackedDomain, TrackedCategory trackedCategory, string path, JsonElement implementationJson) : base(implementationName){
         Domain = trackedDomain;

@@ -6,13 +6,13 @@ namespace Archy.Infrastructure.Tracking.Models;
 
 public class TrackedTool : TrackedBase
 {
-    public required TrackedCategory Category {get; init;}
-    public required TrackedDomain Domain {get; init;}
-    public required string Path {get; init;}
-    public required TrackedPackage Package {get; init;}
-    public required JsonElement UsageJson {get; init;}
+    public TrackedCategory Category {get; init;}
+    public TrackedDomain Domain {get; init;}
+    public string Path {get; init;}
+    public TrackedPackage Package {get; init;}
+    public JsonElement UsageJson {get; init;}
 
-    public required List<TrackedImplementation> Implementations {get; init;}
+    public List<TrackedImplementation> Implementations {get; init;}
 
     public TrackedTool(string toolName, TrackedCategory trackedCategory, TrackedDomain trackedDomain, string path, TrackedPackage trackedPackage, JsonElement usageJson, List<TrackedImplementation> trackedImplementations) : base(toolName){
         Category = trackedCategory;
