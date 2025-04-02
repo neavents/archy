@@ -1,6 +1,6 @@
 using System;
 
-namespace SharedKernel.Infrastructure.Core.Models.Globbing;
+namespace SharedKernel.Infrastructure.IO.Models.Globbing;
 
 public class HierarchicalGlobResult
 {

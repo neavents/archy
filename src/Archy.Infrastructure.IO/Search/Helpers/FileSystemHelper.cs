@@ -1,9 +1,9 @@
 using System;
-using Archy.Application.Contracts.Core.IO.Globbing;
-using Archy.Application.Contracts.Core.IO.Helpers;
+using Archy.Application.Contracts.IO.Search.Globbing;
+using Archy.Application.Contracts.IO.Search.Helpers;
 using DotNet.Globbing;
 
-namespace Archy.Infrastructure.Core.IO.Helpers;
+namespace Archy.Infrastructure.IO.Search.Helpers;
 
 public class FileSystemHelper : IFileSystemHelper
 {

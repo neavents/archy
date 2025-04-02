@@ -1,8 +1,8 @@
 using System;
-using Archy.Application.Contracts.Core.IO;
+using Archy.Application.Contracts.IO.Search.Services;
 using Microsoft.Extensions.Logging;
 
-namespace Archy.Infrastructure.Core.IO;
+namespace Archy.Infrastructure.IO.Search.Services;
 
 public class FileSystemService : IFileSystemService
 {

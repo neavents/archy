@@ -1,10 +1,9 @@
 using System;
-using Archy.Application.Contracts.Core.IO.Globbing;
+using Archy.Application.Contracts.IO.Search.Globbing;
 using DotNet.Globbing;
 using Microsoft.Extensions.Logging;
-using SharedKernel.Infrastructure.Core.Models;
 
-namespace Archy.Infrastructure.Core.IO.Globbing;
+namespace Archy.Infrastructure.IO.Search.Globbing;
 
 public class GlobFactory : IGlobFactory
 {

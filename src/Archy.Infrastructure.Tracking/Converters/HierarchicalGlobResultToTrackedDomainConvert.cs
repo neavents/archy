@@ -1,18 +1,18 @@
 using System;
 using Archy.Application.Contracts.Generic;
 using Archy.Infrastructure.Tracking.Models;
-using SharedKernel.Infrastructure.Core.Models.Globbing;
+using SharedKernel.Infrastructure.IO.Models.Globbing;
 
 namespace Archy.Infrastructure.Tracking.Converters;
 
-public class HierarchicalGlobResultToTrackedDomainConvert : IConvert<HierarchicalGlobResult, IEnumerable<TrackedDomain>>
+public class HierarchicalGlobResultToTrackedDomainConvert : IConvert<IEnumerable<HierarchicalGlobResult>, IEnumerable<TrackedDomain>>
 {
-    public IEnumerable<TrackedDomain> From(HierarchicalGlobResult input)
+    public IEnumerable<TrackedDomain> From(IEnumerable<HierarchicalGlobResult> input)
     {
-        foreach(string segment in input.MatchedWildcardSegments){
+        foreach(HierarchicalGlobResult result in input){
             yield return new TrackedDomain(
-                path: input.RelativePath,
-                name: segment
+                path: result.FullPath,
+                name: result.MatchedWildcardSegments[0]
             );
         };
     }

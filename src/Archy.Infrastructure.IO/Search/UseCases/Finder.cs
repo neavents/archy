@@ -1,13 +1,13 @@
 using System;
-using Archy.Application.Contracts.Core.IO;
-using Archy.Application.Contracts.Core.IO.Globbing;
-using Archy.Application.Contracts.Core.IO.Helpers;
-using Archy.Infrastructure.Core.Models.Globbing;
+using Archy.Application.Contracts.IO.Search.UseCases;
+using Archy.Application.Contracts.IO.Search.Globbing;
+using Archy.Application.Contracts.IO.Search.Helpers;
+using Archy.Application.Contracts.IO.Search.Services;
 using DotNet.Globbing;
 using Microsoft.Extensions.Logging;
-using SharedKernel.Infrastructure.Core.Models.Globbing;
+using SharedKernel.Infrastructure.IO.Models.Globbing;
 
-namespace Archy.Infrastructure.Core.IO;
+namespace Archy.Infrastructure.IO.Search.UseCases;
 
 public class Finder : IFinder
 {
@@ -87,3 +87,4 @@ public class Finder : IFinder
         }
     }
 }
+

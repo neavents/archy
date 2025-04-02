@@ -1,8 +1,8 @@
 using System;
 using DotNet.Globbing;
-using SharedKernel.Infrastructure.Core.Models.Globbing;
+using SharedKernel.Infrastructure.IO.Models.Globbing;
 
-namespace Archy.Application.Contracts.Core.IO;
+namespace Archy.Application.Contracts.IO.Search.UseCases;
 
 public interface IFinder
 {

@@ -1,6 +1,6 @@
 using System;
 
-namespace Archy.Application.Contracts.Core.IO.Helpers;
+namespace Archy.Application.Contracts.IO.Search.Helpers;
 
 public interface IFileSystemHelper
 {

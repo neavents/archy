@@ -1,6 +1,6 @@
 using System;
 
-namespace Archy.Application.Contracts.Core.IO;
+namespace Archy.Application.Contracts.IO.Search.Services;
 
 public interface IFileSystemService
 {
