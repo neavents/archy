@@ -10,7 +10,7 @@ public static class DependencyInjection
 {
     public static IServiceCollection AddCoreInfrastructure(this IServiceCollection services){
 
-        services.AddSingleton<IRegistry<GlobWrapper>, GenericRegistry<GlobWrapper>>();
+        services.AddSingleton<IRegistry<string, GlobWrapper>, GenericRegistry<string, GlobWrapper>>();
 
         return services;
     }

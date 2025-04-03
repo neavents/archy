@@ -1,8 +1,9 @@
 using System;
+using Archy.Domain.Interfaces.Markers;
 
 namespace Archy.Infrastructure.Core.Models.Tracking;
 
-public class TrackedBase
+public class TrackedBase : ITracked
 {
     public string Name {get; set;}
 

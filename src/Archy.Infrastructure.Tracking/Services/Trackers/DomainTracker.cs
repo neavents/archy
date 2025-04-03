@@ -6,6 +6,8 @@ using Archy.Infrastructure.Tracking.Interfaces;
 using Archy.Infrastructure.Tracking.Models;
 using Microsoft.Extensions.Options;
 using SharedKernel.Infrastructure.IO.Models.Globbing;
+using System.Collections;
+using Archy.Domain.Interfaces.Markers;
 
 namespace Archy.Infrastructure.Tracking.Services.Trackers;
 
@@ -22,6 +24,14 @@ public class DomainTracker : IDependencyTracker<TrackedDomain>
         _configurationOptions = configurationOptions.Value;
         _convert = convert;
     }
+
+    public Type TrackerType => typeof(TrackedDomain);
+
+    public async ValueTask<IEnumerable<ITracked>> GenericTrack()
+    {
+        return await Track();
+    }
+
     public async ValueTask<IEnumerable<TrackedDomain>> Track()
     {
         IEnumerable<HierarchicalGlobResult> results = _finder.FindAndMatchAsync(_configurationOptions.Path, _domainOptions.Pattern, true);

@@ -1,40 +1,38 @@
 using System;
+using System.Collections;
 using System.Threading.Tasks;
 using Archy.Application.Contracts.Core;
+using Archy.Application.Contracts.Tracking;
+using Archy.Domain.Interfaces.Markers;
+using Archy.Infrastructure.Core.Models.Tracking;
 using Archy.Infrastructure.Tracking.Interfaces;
 using Archy.Infrastructure.Tracking.Models;
 
 namespace Archy.Infrastructure.Tracking.Services;
 
-public class TrackerService
+public class TrackerService : ITrackerService
 {
-    private readonly IDependencyTracker<TrackedDomain> _domainTracker;
-    private readonly IDependencyTracker<TrackedImplementation> _implementationTracker;
-    private readonly IDependencyTracker<TrackedName> _nameTracker;
-    private readonly IDependencyTracker<TrackedPackage> _packageTracker;
-    private readonly IDependencyTracker<TrackedTool> _toolTracker;
-    private readonly IDependencyTracker<TrackedCategory> _categoryTracker;
+    private readonly IEnumerable<IDependencyTracker> _dependencyTrackers;
+    private readonly IRegistry<Type, IEnumerable<ITracked>> _trackedsRegistry;
 
-    private readonly IRegistry<TrackedCategory> _trackedCategories;
-
-    public TrackerService(IDependencyTracker<TrackedDomain> domainTracker,
-        IDependencyTracker<TrackedImplementation> implementationTracker,
-        IDependencyTracker<TrackedName> nameTracker,
-        IDependencyTracker<TrackedPackage> packageTracker,
-        IDependencyTracker<TrackedTool> toolTracker,
-        IDependencyTracker<TrackedCategory> categoryTracker,
-        IRegistry<TrackedCategory> trackedCategories
-        ) {
-            _categoryTracker = categoryTracker;
-            _toolTracker = toolTracker;
-            _packageTracker = packageTracker;
-            _nameTracker = nameTracker;
-            _implementationTracker = implementationTracker;
-            _domainTracker = domainTracker;
+    public TrackerService(IEnumerable<IDependencyTracker> dependencyTrackers, IRegistry<Type, IEnumerable<ITracked>> trackedsRegistry) {
+        _dependencyTrackers = dependencyTrackers;
+        _trackedsRegistry = trackedsRegistry;
     }
 
     public async Task TrackAllAsync(){
-        _trackedCategories.AddRange(await _categoryTracker.Track(), ks => ks.Name);
+        await Task.Run(async () => {
+            foreach(IDependencyTracker dependencyTracker in _dependencyTrackers){
+                IEnumerable<ITracked> result = await dependencyTracker.GenericTrack();
+
+                if(_trackedsRegistry.TryGetValue(dependencyTracker.TrackerType, out var value)){
+                    _trackedsRegistry.AddRange(() => dependencyTracker.TrackerType, () => [.. value ?? [], .. result]);
+                    continue;
+                }
+
+                _trackedsRegistry.Add(result, ks => dependencyTracker.TrackerType);
+            }
+        });
     }
 
     

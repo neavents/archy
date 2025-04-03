@@ -1,15 +1,18 @@
 using System;
+using System.Collections;
 using Archy.Application.Contracts.Core;
 
 namespace Archy.Infrastructure.Core.Registry;
 
-public class GenericRegistry<T> : IRegistry<T>
+public class GenericRegistry<TKey, TValue> : IRegistry<TKey, TValue>
 {
-    private readonly Dictionary<string, T> _kvps = [];
+    private readonly Dictionary<TKey, TValue> _kvps = [];
 
-    public void Add(T item, Func<T, string> keySelector)
+    public Type RegistryType => typeof(TValue);
+
+    public void Add(TValue item, Func<TValue, TKey> keySelector)
     {
-        string key = keySelector(item);
+        TKey key = keySelector(item);
         if(_kvps.ContainsKey(key)){
             throw new InvalidOperationException($"Duplicate key found: {key}");
         }
@@ -17,34 +20,55 @@ public class GenericRegistry<T> : IRegistry<T>
         _kvps.Add(key, item);
     }
 
-    public void AddRange(IEnumerable<T> items, Func<T, string> keySelector)
+    public void AddRange(Func<TKey> keySelector, Func<TValue> appendRule)
     {
-        foreach(T item in items){
-            Add(item, keySelector);
+        TKey key = keySelector();
+
+        if(_kvps.ContainsKey(key)){
+            _kvps[key] = appendRule();
+            return; 
         }
+
+        _kvps.Add(key, appendRule());
+    }
+    public void AddRange(IEnumerable<TValue> items, Func<IEnumerable<TValue>, TKey> keySelector, Func<TValue> appendRule)
+    {
+        TKey key = keySelector(items);
+
+        if(_kvps.ContainsKey(key)){
+            _kvps[key] = appendRule();
+            return; 
+        }
+
+        _kvps.Add(key, appendRule());
     }
 
-    public bool ContainsKey(string key)
+    public bool ContainsKey(TKey key)
     {
         return _kvps.ContainsKey(key);
     }
 
-    public bool ContainsValue(T value)
+    public bool ContainsValue(TValue value)
     {
         return _kvps.ContainsValue(value);
     }
 
-    public T? Get(string key)
+    public TValue? Get(TKey key)
     {
-        if(_kvps.TryGetValue(key, out T? value)){
+        if(_kvps.TryGetValue(key, out TValue? value)){
             return value;
         }
 
         return default;
     }
 
-    public IReadOnlyList<T> GetAll()
+    public IReadOnlyList<TValue> GetAll()
     {
         return [.. _kvps.Values];
+    }
+
+    public bool TryGetValue(TKey key, out TValue? value)
+    {
+        return _kvps.TryGetValue(key, out value);
     }
 }
