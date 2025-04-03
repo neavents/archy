@@ -22,13 +22,9 @@ public class DomainTracker : IDependencyTracker<TrackedDomain>
         _configurationOptions = configurationOptions.Value;
         _convert = convert;
     }
-    public async ValueTask<List<TrackedDomain>> Track()
+    public async ValueTask<IEnumerable<TrackedDomain>> Track()
     {
-        
-        //Open the configurations directory
-        //each subdirectory is domain
-
         IEnumerable<HierarchicalGlobResult> results = _finder.FindAndMatchAsync(_configurationOptions.Path, _domainOptions.Pattern, true);
-        return _convert.From(results).ToList();
+        return _convert.From(results);
     }
 }

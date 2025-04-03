@@ -17,6 +17,13 @@ public class GenericRegistry<T> : IRegistry<T>
         _kvps.Add(key, item);
     }
 
+    public void AddRange(IEnumerable<T> items, Func<T, string> keySelector)
+    {
+        foreach(T item in items){
+            Add(item, keySelector);
+        }
+    }
+
     public bool ContainsKey(string key)
     {
         return _kvps.ContainsKey(key);
