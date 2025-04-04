@@ -8,7 +8,10 @@ public static class ConfigurationLoader
 {
     public static void Load(HostApplicationBuilder builder)
     {
-        builder.Configuration.SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
+        builder.Configuration.SetBasePath(Directory.GetCurrentDirectory())
+            .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+            .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", optional: true, reloadOnChange: true )
+            .AddEnvironmentVariables();;
 
         ExternalConfigurationSettingsJson(builder);
         ExternalProfileSettings(builder);

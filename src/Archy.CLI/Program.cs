@@ -7,6 +7,7 @@ using Archy.Infrastructure.Selecting;
 using Archy.Infrastructure.Tracking;
 using Microsoft.Extensions.Configuration;
 using Archy.CLI;
+using Archy.CLI.UI;
 using Serilog;
 
 // {
@@ -57,7 +58,9 @@ builder.Services.AddCoreInfrastructure()
                 .AddSelecting()
                 .AddTracking();
 
+builder.Services.AddUI();
+
 using IHost host = builder.Build();
 
 EntryPoint app = new(host.Services);
-app.Run();
+await app.Run();

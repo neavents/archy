@@ -4,7 +4,7 @@ using Archy.Application.Contracts.Generic;
 
 namespace Archy.Application.Contracts.Execution;
 
-public interface IExecutionPlugin : IPluginRegister<IRuleExecutor>
+public interface IExecutionPlugin : IPluginRegister<string, IRuleExecutor>
 {
     
 }

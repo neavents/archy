@@ -58,6 +58,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Archy.Application\Archy.Application.csproj" />
+    <ProjectReference Include="..\Archy.CLI.UI\Archy.CLI.UI.csproj" />
     <ProjectReference Include="..\Archy.Domain\Archy.Domain.csproj" />
     <ProjectReference Include="..\Archy.Infrastructure.Core\Archy.Infrastructure.Core.csproj" />
     <ProjectReference Include="..\Archy.Infrastructure.Execution\Archy.Infrastructure.Execution.csproj" />
