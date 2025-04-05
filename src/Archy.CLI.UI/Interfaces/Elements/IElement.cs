@@ -1,7 +1,7 @@
 using System;
 using Archy.CLI.UI.Models.Elements;
 
-namespace Archy.CLI.UI.Interfaces;
+namespace Archy.CLI.UI.Interfaces.Elements;
 
 public interface IElement{
     public ValueTask Render();

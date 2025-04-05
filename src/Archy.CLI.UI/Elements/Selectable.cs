@@ -1,5 +1,6 @@
 using System;
 using Archy.CLI.UI.Interfaces;
+using Archy.CLI.UI.Interfaces.Elements;
 using Archy.CLI.UI.Models.Elements;
 using Spectre.Console;
 

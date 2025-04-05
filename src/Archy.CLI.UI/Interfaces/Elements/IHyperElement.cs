@@ -1,6 +1,6 @@
 using System;
 
-namespace Archy.CLI.UI.Interfaces;
+namespace Archy.CLI.UI.Interfaces.Elements;
 
 public interface IHyperElement : IElement
 {

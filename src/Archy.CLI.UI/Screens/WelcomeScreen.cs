@@ -2,6 +2,7 @@ using System;
 using Archy.CLI.UI.Elements;
 using Archy.CLI.UI.HyperElements;
 using Archy.CLI.UI.Interfaces;
+using Archy.CLI.UI.Interfaces.Elements;
 using Archy.CLI.UI.Models.Contexts;
 using Archy.CLI.UI.Models.Progresses;
 using SharedKernel.Extensions;
@@ -69,7 +70,7 @@ public class WelcomeScreen : IScreen
             ]};
 
         IHyperElement<FuncMenuContext<string>> hyperElement = new FunctionalMenu();
-        await hyperElement.Render(new(){Value = menuContext, Header = "Selector"});
+        await hyperElement.Render(new(){Value = menuContext, Header = "[blue]Selector[/]"});
 
         IElement<List<string>,List<string>> element1 = new Selectables();
         await element1.Render(new(){
