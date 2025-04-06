@@ -11,11 +11,13 @@ public class BreadcrumbService : IBreadcrumbService
     private StringBuilder stringBuilder = new();
 
     private const string MARK_COLOR = "blue";
+    private const string SEPERATOR_COLOR = "gray";
+    private const string SEPERATOR = $"[{SEPERATOR_COLOR}]/[/]";
     private string Mark(string innerText) => $"[{MARK_COLOR}]{innerText}[/]";
 
     private void EnsureLastElementMarked(){
         if(strings.Count >= 2)
-            strings[^2].RemoveMarkup();
+            strings[^2] = strings[^2].RemoveMarkup();
         strings[^1] = Mark(strings[^1]);
     }
 
@@ -33,8 +35,13 @@ public class BreadcrumbService : IBreadcrumbService
 
     public string RenderBreadcrumb()
     {
+        int j = 0;
         foreach(string i in strings){
+            if(j > 0)
+                stringBuilder.Append($" {SEPERATOR} ");
             stringBuilder.Append(i);
+            
+            j++;
         }
 
         string breadcrumb = stringBuilder.ToString();
