@@ -1,4 +1,5 @@
 using System;
+using Archy.CLI.UI.Constants.Menu;
 using Archy.CLI.UI.Elements;
 using Archy.CLI.UI.HyperElements;
 using Archy.CLI.UI.Interfaces;
@@ -6,6 +7,7 @@ using Archy.CLI.UI.Interfaces.Elements;
 using Archy.CLI.UI.Models.Contexts;
 using Archy.CLI.UI.Models.Progresses;
 using SharedKernel.Extensions;
+using Spectre.Console;
 
 namespace Archy.CLI.UI.Screens;
 
@@ -16,20 +18,22 @@ public class WelcomeScreen : IScreen
         Priority = priority;
     }
 
-    public async ValueTask Render()
+    public async ValueTask Render(Layout layout)
     {
         string selectionName = "domain";
         List<string> domains = ["database", "messaging", "security", "auth", "blabla"];
 
-        var element = new SearchingProgress();
-        await element.Execute();
+        //var element = new SearchingProgress();
+        //await element.Execute();
 
         FuncMenuContext<string> menuContext = new FuncMenuContext<string>(){Value = "domain",
             Childs = [
                 new(){Value = "database",
                     Childs = [
+                        new(){Value = MenuCommands.MenuBackSignal},
                         new(){Value = "sql",
                             Childs = [
+                                new(){Value = MenuCommands.MenuBackSignal},
                                 new(){Value = "postgresql"},
                                 new(){Value = "mysql"},
                                 new(){Value = "mssql"},
@@ -37,18 +41,22 @@ public class WelcomeScreen : IScreen
                             ]},
                         new(){Value = "nosql",
                             Childs = [
+                                new(){Value = MenuCommands.MenuBackSignal},
                                 new(){Value = "mongodb"},
                                 new(){Value = "cassandra"}
                             ]},
                         new(){Value = "graph",
                             Childs = [
+                                new(){Value = MenuCommands.MenuBackSignal},
                                 new(){Value = "neo4j"}
                             ]}
                     ]},
                 new(){Value = "messaging",
                     Childs = [
+                        new(){Value = MenuCommands.MenuBackSignal},
                         new(){Value = "local",
                             Childs = [
+                                new(){Value = MenuCommands.MenuBackSignal},
                                 new(){Value = "activemq"},
                                 new(){Value = "apache-pulsar"},
                                 new(){Value = "kafka"},
@@ -58,6 +66,7 @@ public class WelcomeScreen : IScreen
                             ]},
                         new(){Value = "cloud",
                             Childs = [
+                                new(){Value = MenuCommands.MenuBackSignal},
                                 new(){Value = "amazon=sns"},
                                 new(){Value = "amazon-sqs"},
                                 new(){Value = "aws-eventbridge"},
@@ -65,8 +74,14 @@ public class WelcomeScreen : IScreen
                                 new(){Value = "google-pubsub"}
                             ]}
                     ]},
-                new(){Value = "security"},
-                new(){Value = "auth"}
+                new(){Value = "security",
+                    Childs = [
+                        new(){Value = MenuCommands.MenuBackSignal},
+                    ]},
+                new(){Value = "auth", 
+                    Childs = [
+                        new(){Value = MenuCommands.MenuBackSignal},
+                    ]}
             ]};
 
         IHyperElement<FuncMenuContext<string>> hyperElement = new FunctionalMenu();

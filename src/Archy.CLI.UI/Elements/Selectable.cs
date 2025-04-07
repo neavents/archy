@@ -10,14 +10,18 @@ public class Selectable : IElement<List<string>, string>
 {
     private const int PAGE_SIZE = 10;
     private const string MORE_CHOICES_TEXT = "[grey](Move up and down to reveal more items)[/]";
-    public async ValueTask<string> Render(ElementContext<List<string>> context)
+    public async ValueTask<string> Render(ElementContext<List<string>> context, Layout? layout = null)
     {
-        return AnsiConsole.Prompt(
-            new SelectionPrompt<string>()
+        var prompt = new SelectionPrompt<string>()
             .Title(context.Header)
             .PageSize(context.IntegerValue ?? PAGE_SIZE)
             .MoreChoicesText(context.Description ?? MORE_CHOICES_TEXT)
             .EnableSearch()
-            .AddChoices(context.Value));
+            .AddChoices(context.Value);
+
+        if(layout is not null){
+            layout.Update(prompt);
+        }
+        return AnsiConsole.Prompt(prompt);
     }
 }

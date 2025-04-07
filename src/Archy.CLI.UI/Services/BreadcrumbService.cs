@@ -15,9 +15,21 @@ public class BreadcrumbService : IBreadcrumbService
     private const string SEPERATOR = $"[{SEPERATOR_COLOR}]/[/]";
     private string Mark(string innerText) => $"[{MARK_COLOR}]{innerText}[/]";
 
-    private void EnsureLastElementMarked(){
-        if(strings.Count >= 2)
+    private void EnsureLastElementMarked(bool fullSearch = false){
+        if(strings.Count < 1){
+            return;
+        }
+
+        if(fullSearch){
+            for(int i = 0; i < strings.Count; i++){
+                strings[i] = strings[i].RemoveMarkup();
+            }
+        } else if(strings.Count >= 2) {
             strings[^2] = strings[^2].RemoveMarkup();
+        } else if(strings.Count == 1){
+            strings[0] = strings[0].RemoveMarkup();
+        }
+
         strings[^1] = Mark(strings[^1]);
     }
 
@@ -31,6 +43,11 @@ public class BreadcrumbService : IBreadcrumbService
     {
         strings.RemoveAt(strings.Count - 1);
         EnsureLastElementMarked();
+    }
+
+    public void Remove(string element){
+        strings.Remove(element);
+        EnsureLastElementMarked(true);
     }
 
     public string RenderBreadcrumb()
