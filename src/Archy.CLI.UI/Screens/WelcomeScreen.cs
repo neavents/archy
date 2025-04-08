@@ -18,7 +18,7 @@ public class WelcomeScreen : IScreen
         Priority = priority;
     }
 
-    public async ValueTask Render(Layout layout)
+    public async ValueTask Render()
     {
         string selectionName = "domain";
         List<string> domains = ["database", "messaging", "security", "auth", "blabla"];

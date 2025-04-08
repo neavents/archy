@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include=".tui\" />
     <Folder Include="Configurations/database/impl/nosql/dynamodb/" />
     <Folder Include="Configurations/database/impl/nosql/mongodb/" />
     <Folder Include="Configurations/database/impl/nosql/ravendb/" />
@@ -58,6 +59,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Archy.Application\Archy.Application.csproj" />
+    <ProjectReference Include="..\Archy.CLI.Terminal\Archy.CLI.Terminal.csproj" />
     <ProjectReference Include="..\Archy.CLI.UI\Archy.CLI.UI.csproj" />
     <ProjectReference Include="..\Archy.Domain\Archy.Domain.csproj" />
     <ProjectReference Include="..\Archy.Infrastructure.Core\Archy.Infrastructure.Core.csproj" />

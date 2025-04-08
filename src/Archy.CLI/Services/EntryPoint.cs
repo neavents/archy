@@ -1,6 +1,6 @@
 using System;
 using System.Threading.Tasks;
-using Archy.Application.Contracts.UI.Services;
+using Archy.Application.Contracts.Terminal.Core.Engines;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Archy.CLI.Services;
@@ -13,7 +13,7 @@ public class EntryPoint
     }
 
     public async Task Run(){
-        var screenManager = _services.GetRequiredService<IScreenManager>();
+        var screenManager = _services.GetRequiredService<IScreenEngine>();
         await screenManager.Render();
     }
 }

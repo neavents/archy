@@ -8,6 +8,7 @@ using Archy.Infrastructure.Tracking;
 using Microsoft.Extensions.Configuration;
 using Archy.CLI;
 using Archy.CLI.UI;
+using Archy.CLI.Terminal;
 using Serilog;
 
 // {
@@ -58,7 +59,8 @@ builder.Services.AddCoreInfrastructure()
                 .AddSelecting()
                 .AddTracking();
 
-builder.Services.AddUI();
+// builder.Services.AddUI();
+builder.Services.AddTerminal();
 
 using IHost host = builder.Build();
 

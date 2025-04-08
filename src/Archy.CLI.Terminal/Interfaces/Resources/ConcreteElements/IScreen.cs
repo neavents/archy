@@ -1,7 +1,6 @@
 using System;
-using Spectre.Console;
 
-namespace Archy.CLI.UI.Interfaces;
+namespace Archy.CLI.Terminal.Interfaces.Resources.ConcreteElements;
 
 public interface IScreen
 {
