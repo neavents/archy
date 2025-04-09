@@ -11,7 +11,7 @@ public class HomeScreen : IScreen
         Priority = priority ?? 0;
     }
 
-    public ValueTask Render()
+    public async ValueTask Render()
     {
         
     }
