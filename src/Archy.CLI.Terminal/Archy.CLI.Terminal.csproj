@@ -13,8 +13,8 @@
 
   <ItemGroup>
     <Folder Include="Core\Services\" />
-    <Folder Include="Data\" />
     <Folder Include="Data\Constants\" />
+    <Folder Include="Data\DTOs\" />
     <Folder Include="Data\Models\" />
     <Folder Include="Interfaces\Core\Engines\" />
     <Folder Include="Interfaces\Core\Services\" />

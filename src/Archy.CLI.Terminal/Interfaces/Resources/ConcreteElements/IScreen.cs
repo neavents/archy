@@ -1,9 +1,10 @@
 using System;
+using Terminal.Gui;
 
 namespace Archy.CLI.Terminal.Interfaces.Resources.ConcreteElements;
 
 public interface IScreen
 {
     public int Priority {get; init;}
-    public ValueTask Render();
+    public ValueTask<Toplevel> Render();
 }

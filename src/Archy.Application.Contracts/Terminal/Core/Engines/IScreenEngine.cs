@@ -1,8 +1,9 @@
 using System;
+using Terminal.Gui;
 
 namespace Archy.Application.Contracts.Terminal.Core.Engines;
 
 public interface IScreenEngine
 {
-    public ValueTask Render();
+    public ValueTask<Toplevel> Render();
 }

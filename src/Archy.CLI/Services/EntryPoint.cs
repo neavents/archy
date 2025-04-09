@@ -13,7 +13,10 @@ public class EntryPoint
     }
 
     public async Task Run(){
-        var screenManager = _services.GetRequiredService<IScreenEngine>();
-        await screenManager.Render();
+        IScreenEngine screen = _services.GetRequiredService<IScreenEngine>();
+        ITerminalEngine terminal = _services.GetRequiredService<ITerminalEngine>();
+        TerminalUI terminalUI = new (terminal, screen);
+
+        await terminalUI.RenderUI();
     }
 }

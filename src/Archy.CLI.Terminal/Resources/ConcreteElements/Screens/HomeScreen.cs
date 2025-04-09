@@ -1,5 +1,6 @@
 using System;
 using Archy.CLI.Terminal.Interfaces.Resources.ConcreteElements;
+using Terminal.Gui;
 
 namespace Archy.CLI.Terminal.Resources.ConcreteElements.Screens;
 
@@ -11,8 +12,12 @@ public class HomeScreen : IScreen
         Priority = priority ?? 0;
     }
 
-    public async ValueTask Render()
+    public async ValueTask<Toplevel> Render()
     {
-        
+        Window window = new Window(){
+            Text = "Hello Everyone",
+        };
+
+        return window;
     }
 }
