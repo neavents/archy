@@ -22,7 +22,7 @@ public class Frame : IElement
             parentView.Add(_frameView);
         }
     }
-    public Frame(string name, ViewConfig config, View? parentView = null){
+    public Frame(ViewConfig config, string? name = null,  View? parentView = null){
         _frameView = new FrameView(title: name){
             X = config.X,
             Y = config.Y,

@@ -1,4 +1,7 @@
 using System;
+using Archy.CLI.Terminal.Core.Services;
+using Archy.CLI.Terminal.Core.Services.Adaptors;
+using Archy.CLI.Terminal.Interfaces.Core.Services;
 using Archy.CLI.Terminal.Interfaces.Resources.ConcreteElements;
 using Archy.CLI.Terminal.Interfaces.Resources.Elements;
 using Archy.CLI.Terminal.Interfaces.Resources.Profiles;
@@ -13,6 +16,7 @@ public class LayoutTestingScreen : IScreen
     public int Priority { get; init; }
     private readonly IElement _left;
     private readonly IElement _right;
+    private readonly IViewSlicerService _viewSlicer;
     private readonly FrameView _leftFrame;
 
     private readonly IFrameProfile _leftProfile;
@@ -28,6 +32,12 @@ public class LayoutTestingScreen : IScreen
         _left = new Frame();
         _right = new Frame();
 
+        _viewSlicer = new ViewSlicerService();
+
+        ISlicer verticalSlicer = new VerticalSlicerAdaptor();
+        _viewSlicer.Mount(verticalSlicer).SetCount(4);
+
+
         _leftProfile = new LeftFrameProfile();
         _rightProfile = new RightFrameProfile();
 
@@ -36,6 +46,7 @@ public class LayoutTestingScreen : IScreen
 
         _travelList = new ListView();
         //TODO create a frameview service that get number as input and create evenly positionated and widthed frameview (eg. input 3, width Dim.Percentage(33) and X is previous one's finish);
+        
     }
 
     public void Init(){
@@ -44,7 +55,11 @@ public class LayoutTestingScreen : IScreen
 
     public async ValueTask<Toplevel> Render(Toplevel toplevel)
     {
-        _left.RenderIn(toplevel);
+        var views = _viewSlicer.Slice(toplevel);
+        ISlicer hS = new HorizontalSlicerAdaptor();
+        _viewSlicer.Mount(hS);
+        _viewSlicer.Slice(views[0]);
+        //_left.RenderIn(toplevel);
         //_right.RenderIn(toplevel);
         return toplevel;
     }

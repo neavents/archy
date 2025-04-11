@@ -13,10 +13,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Core\Services\" />
     <Folder Include="Data\DTOs\" />
     <Folder Include="Interfaces\Core\Engines\" />
-    <Folder Include="Interfaces\Core\Services\" />
     <Folder Include="Interfaces\Core\Helpers\" />
     <Folder Include="Core\Helpers\" />
   </ItemGroup>
