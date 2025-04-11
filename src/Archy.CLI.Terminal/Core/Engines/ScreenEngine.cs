@@ -10,10 +10,13 @@ public class ScreenEngine : IScreenEngine
 {
     private readonly IScreen _homeScreen;
     public ScreenEngine(){
-        _homeScreen = new HomeScreen();
+        _homeScreen = new LayoutTestingScreen();
     }
     public async ValueTask<Toplevel> Render()
     {
-        return await _homeScreen.Render();
+        Toplevel toplevel = new Toplevel();
+        _homeScreen.Init();
+
+        return await _homeScreen.Render(toplevel);
     }
 }

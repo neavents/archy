@@ -7,22 +7,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Figgle" Version="0.5.1" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.3" />
     <PackageReference Include="Terminal.Gui" Version="1.18.0" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Core\Services\" />
-    <Folder Include="Data\Constants\" />
     <Folder Include="Data\DTOs\" />
-    <Folder Include="Data\Models\" />
     <Folder Include="Interfaces\Core\Engines\" />
     <Folder Include="Interfaces\Core\Services\" />
-    <Folder Include="Interfaces\Resources\Elements\" />
-    <Folder Include="Interfaces\Resources\HyperElements\" />
     <Folder Include="Interfaces\Core\Helpers\" />
-    <Folder Include="Resources\Elements\" />
-    <Folder Include="Resources\HyperElements\" />
     <Folder Include="Core\Helpers\" />
   </ItemGroup>
 

@@ -6,5 +6,6 @@ namespace Archy.CLI.Terminal.Interfaces.Resources.ConcreteElements;
 public interface IScreen
 {
     public int Priority {get; init;}
-    public ValueTask<Toplevel> Render();
+    public ValueTask<Toplevel> Render(Toplevel toplevel);
+    public void Init();
 }
