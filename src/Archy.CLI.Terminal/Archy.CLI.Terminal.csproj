@@ -9,6 +9,7 @@
   <ItemGroup>
     <PackageReference Include="Figgle" Version="0.5.1" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.3" />
+    <PackageReference Include="Microsoft.Extensions.Options" Version="9.0.4" />
     <PackageReference Include="Terminal.Gui" Version="1.18.0" />
   </ItemGroup>
 
@@ -21,6 +22,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Archy.Application.Contracts\Archy.Application.Contracts.csproj" />
+    <ProjectReference Include="..\Archy.Domain\Archy.Domain.csproj" />
   </ItemGroup>
 
 </Project>

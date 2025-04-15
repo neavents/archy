@@ -7,6 +7,8 @@ using Archy.CLI.Terminal.Interfaces.Resources.Elements;
 using Archy.CLI.Terminal.Interfaces.Resources.Profiles;
 using Archy.CLI.Terminal.Resources.Elements;
 using Archy.CLI.Terminal.Resources.Profiles.Frames;
+using Archy.Domain.Settings;
+using Microsoft.Extensions.Options;
 using Terminal.Gui;
 
 namespace Archy.CLI.Terminal.Resources.ConcreteElements.Screens;
@@ -14,8 +16,8 @@ namespace Archy.CLI.Terminal.Resources.ConcreteElements.Screens;
 public class LayoutTestingScreen : IScreen
 {
     public int Priority { get; init; }
-    private readonly IElement _left;
-    private readonly IElement _right;
+    private FrameView _left;
+    private FrameView _right;
     private readonly IViewSlicerService _viewSlicer;
     private readonly FrameView _leftFrame;
 
@@ -26,39 +28,38 @@ public class LayoutTestingScreen : IScreen
     private readonly ListView _selectedsList;
     private readonly TreeView _treeView;
 
-    public LayoutTestingScreen(int? priority = null){
+    public LayoutTestingScreen(IOptions<VersionOptions> versionOptions, int? priority = null)
+    {
         Priority = priority ?? 0;
-
-        _left = new Frame();
-        _right = new Frame();
 
         _viewSlicer = new ViewSlicerService();
 
         ISlicer verticalSlicer = new VerticalSlicerAdaptor();
-        _viewSlicer.Mount(verticalSlicer).SetCount(4);
+        _viewSlicer.Mount(verticalSlicer).SetCount(2);
 
 
-        _leftProfile = new LeftFrameProfile();
+        _leftProfile = new LeftFrameProfile(versionOptions);
         _rightProfile = new RightFrameProfile();
 
-        _leftProfile.Configure(_left.GetView());
-        _rightProfile.Configure(_right.GetView());
 
         _travelList = new ListView();
         //TODO create a frameview service that get number as input and create evenly positionated and widthed frameview (eg. input 3, width Dim.Percentage(33) and X is previous one's finish);
-        
+
     }
 
-    public void Init(){
+    public async ValueTask<Toplevel> Init(Toplevel toplevel)
+    {
 
+        return toplevel;
     }
 
     public async ValueTask<Toplevel> Render(Toplevel toplevel)
     {
         var views = _viewSlicer.Slice(toplevel);
-        ISlicer hS = new HorizontalSlicerAdaptor();
-        _viewSlicer.Mount(hS);
-        _viewSlicer.Slice(views[0]);
+
+        _leftProfile.Configure(views[0]);
+        //_rightProfile.Configure(views[1]);
+
         //_left.RenderIn(toplevel);
         //_right.RenderIn(toplevel);
         return toplevel;

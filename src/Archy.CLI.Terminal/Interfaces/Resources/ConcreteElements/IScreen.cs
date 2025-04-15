@@ -7,5 +7,5 @@ public interface IScreen
 {
     public int Priority {get; init;}
     public ValueTask<Toplevel> Render(Toplevel toplevel);
-    public void Init();
+    public ValueTask<Toplevel> Init(Toplevel toplevel);
 }

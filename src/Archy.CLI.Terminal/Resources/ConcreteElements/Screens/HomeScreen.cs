@@ -16,8 +16,8 @@ public class HomeScreen : IScreen
         Priority = priority ?? 0;
         _directoryList = [];
     }
-    public void Init(){
-        
+    public async ValueTask<Toplevel> Init(Toplevel toplevel){
+        return toplevel;
     }
 
     public async ValueTask<Toplevel> Render(Toplevel topLevel)
