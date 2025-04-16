@@ -13,6 +13,8 @@ public class TerminalUI
         _screenEngine = screenEngine;
     }
     public async Task RenderUI(){
+        await _terminalEngine.Init();
+        
         var screen = await _screenEngine.Render();
         
         await _terminalEngine.Start(screen);

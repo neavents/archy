@@ -9,9 +9,11 @@ public class TerminalEngine : ITerminalEngine
 {
     private List<Toplevel> toBeDisposed = [];
 
+    public async Task Init(){
+        TerminalUI.Application.Init();
+    }
     public async Task Start(Toplevel view)
     {
-        TerminalUI.Application.Init();
         TerminalUI.Application.Run(view);
 
         toBeDisposed.Add(view);

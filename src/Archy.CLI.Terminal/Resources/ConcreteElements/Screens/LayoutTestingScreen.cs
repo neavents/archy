@@ -58,7 +58,7 @@ public class LayoutTestingScreen : IScreen
         var views = _viewSlicer.Slice(toplevel);
 
         _leftProfile.Configure(views[0]);
-        //_rightProfile.Configure(views[1]);
+        _rightProfile.Configure(views[1]);
 
         //_left.RenderIn(toplevel);
         //_right.RenderIn(toplevel);
